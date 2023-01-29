@@ -1,1 +1,21 @@
+h1 {
+  text-align: center;
+}
 
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
+  background-color: #ccc;
+  gap: 2vmin;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  position: relative;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.cell {
+  background-color: #aaa;
+  border-radius: 1vmin;
+}

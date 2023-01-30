@@ -48,8 +48,15 @@ function setUpGame() {
   console.log("Game set up");
 }
 
-// Add tile element to gicen cell
-function setTile(cell, value) {
+// Animations
+const showAnimation = [{ transform: "scale(0)" }, { transform: "scale(1)" }];
+const showAnimationTiming = {
+  duration: 300,
+  iterations: 1,
+};
+
+// Add tile element to given cell
+function setTile(cell, value, isNewTile = false) {
   let tile = document.createElement("div");
   tile.innerText = "";
   tile.className = "tile";
@@ -57,6 +64,9 @@ function setTile(cell, value) {
     tile.innerText = value.toString();
     cell.innerHTML = "";
     cell.append(tile);
+    if (isNewTile) {
+      tile.animate(showAnimation, showAnimationTiming);
+    }
   }
 }
 
@@ -68,6 +78,7 @@ function updateBoard() {
       setTile(cell, boardArray[i][j]);
     }
   }
+  spawnNewTile();
 }
 
 function updateScore() {
@@ -122,7 +133,6 @@ function slideHorizontally(dir) {
     }
   }
 
-  spawnNewTile();
   updateBoard();
   updateScore();
 }
@@ -158,7 +168,6 @@ function slideVertically(dir) {
     }
   }
 
-  spawnNewTile();
   updateBoard();
   updateScore();
 }
@@ -184,6 +193,8 @@ function spawnNewTile() {
       c = Math.floor(Math.random() * 4);
       if (boardArray[r][c] == 0) {
         boardArray[r][c] = randomTileValue();
+        cell = document.getElementById(r.toString() + c.toString());
+        setTile(cell, boardArray[r][c], true);
         spawned = true;
       }
     }

@@ -19,3 +19,14 @@ h1 {
   background-color: #aaa;
   border-radius: 1vmin;
 }
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  width: 20vmin;
+  height: 20vmin;
+  border-radius: 1vmin;
+  background-color: aquamarine;
+}

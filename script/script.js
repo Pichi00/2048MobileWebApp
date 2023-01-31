@@ -1,5 +1,6 @@
 const gameBoard = document.getElementById("game-board");
 const scoreView = document.getElementById("score");
+const undoButton = document.getElementById("undoButton");
 const GRID_SIZE = 4;
 
 const Direction = {
@@ -27,13 +28,13 @@ function setUpGame() {
   console.log("Setting up game");
 
   boardArray = [
-    [2, 4, 8, 16],
-    [2,2,0,2],
-    [0,0,0,0],
+    [0, 4, 8, 16],
+    [2, 2, 0, 2],
+    [0, 0, 0, 0],
     [0, 0, 0, 0],
   ];
 
-  undoArray = boardArray.slice();
+  undoArray = JSON.parse(JSON.stringify(boardArray));
 
   score = 0;
   updateScore();
@@ -83,7 +84,6 @@ function updateBoard() {
       setTile(cell, boardArray[i][j]);
     }
   }
-  //spawnNewTile();
 }
 
 function updateScore() {
@@ -119,7 +119,9 @@ function slideHorizontally(dir) {
     return;
   }
 
-  undoArray = boardArray.slice();
+  undoButton.disabled = false;
+  undoArray = JSON.parse(JSON.stringify(boardArray));
+  undoscore = score;
 
   for (let r = 0; r < GRID_SIZE; r++) {
     let row = boardArray[r].slice();
@@ -139,9 +141,10 @@ function slideHorizontally(dir) {
       setTile(tile, num);
     }
   }
-  
+
   updateBoard();
   updateScore();
+  spawnNewTile();
 }
 
 // For sliding up and down
@@ -151,7 +154,10 @@ function slideVertically(dir) {
     return;
   }
 
-  undoArray = boardArray.slice();
+  undoButton.disabled = false;
+  undoArray = JSON.parse(JSON.stringify(boardArray));
+  undoscore = score;
+
   for (let c = 0; c < GRID_SIZE; c++) {
     let column = Array(
       boardArray[0][c],
@@ -177,6 +183,7 @@ function slideVertically(dir) {
   }
   updateBoard();
   updateScore();
+  spawnNewTile();
 }
 
 // TODO: Add touch events
@@ -237,6 +244,9 @@ function canSpawnNewTile() {
 }
 
 function undo() {
-  boardArray = undoArray.slice();
+  boardArray = JSON.parse(JSON.stringify(undoArray));
+  score = undoscore;
   updateBoard();
+  updateScore();
+  undoButton.disabled = true;
 }

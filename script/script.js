@@ -11,6 +11,8 @@ const Direction = {
 
 let boardArray;
 let score = 0;
+let undoArray;
+let undoscore = 0;
 
 // Chances of spawning values
 const CHANCE_2 = 65;
@@ -25,15 +27,17 @@ function setUpGame() {
   console.log("Setting up game");
 
   boardArray = [
-    [0, 0, 0, 0],
-    [0, 0, 2, 2],
-    [0, 0, 4, 8],
+    [2, 4, 8, 16],
+    [2,2,0,2],
+    [0,0,0,0],
     [0, 0, 0, 0],
   ];
 
+  undoArray = boardArray.slice();
+
   score = 0;
   updateScore();
-
+  gameBoard.innerHTML = "";
   // Create cells of the grid in html
   for (let i = 0; i < GRID_SIZE; i++) {
     for (let j = 0; j < GRID_SIZE; j++) {
@@ -59,7 +63,8 @@ const showAnimationTiming = {
 function setTile(cell, value, isNewTile = false) {
   let tile = document.createElement("div");
   tile.innerText = "";
-  tile.className = "tile";
+  tile.className = "tile val";
+  tile.className += value.toString();
   if (value > 0) {
     tile.innerText = value.toString();
     cell.innerHTML = "";
@@ -78,7 +83,7 @@ function updateBoard() {
       setTile(cell, boardArray[i][j]);
     }
   }
-  spawnNewTile();
+  //spawnNewTile();
 }
 
 function updateScore() {
@@ -114,8 +119,10 @@ function slideHorizontally(dir) {
     return;
   }
 
+  undoArray = boardArray.slice();
+
   for (let r = 0; r < GRID_SIZE; r++) {
-    let row = boardArray[r];
+    let row = boardArray[r].slice();
 
     if (dir == Direction.Left) {
       row = slide(row);
@@ -132,7 +139,7 @@ function slideHorizontally(dir) {
       setTile(tile, num);
     }
   }
-
+  
   updateBoard();
   updateScore();
 }
@@ -144,6 +151,7 @@ function slideVertically(dir) {
     return;
   }
 
+  undoArray = boardArray.slice();
   for (let c = 0; c < GRID_SIZE; c++) {
     let column = Array(
       boardArray[0][c],
@@ -167,7 +175,6 @@ function slideVertically(dir) {
       setTile(tile, num);
     }
   }
-
   updateBoard();
   updateScore();
 }
@@ -227,4 +234,9 @@ function canSpawnNewTile() {
     }
   }
   return false;
+}
+
+function undo() {
+  boardArray = undoArray.slice();
+  updateBoard();
 }

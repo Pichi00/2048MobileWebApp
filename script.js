@@ -200,9 +200,9 @@ function spawnNewTile() {
     }
   }
   // TODO: Add check condition if player has avaliable moves
-  /*else {
+  else {
     alert("GAME OVER!");
-  }*/
+  }
 }
 
 // Randomize value of new spawned tile

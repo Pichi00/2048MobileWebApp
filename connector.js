@@ -25,7 +25,6 @@ function GETData(callback) {
 
 function topScoresToJson(topScores) {
   let jsonData = "[";
-  console.log(topScores);
   for (let i = 0; i < topScores.length; i++) {
     jsonData += JSON.stringify({
       nickname: topScores[i][0],
@@ -37,6 +36,5 @@ function topScoresToJson(topScores) {
     }
   }
   jsonData += "]";
-  console.log(jsonData);
   return jsonData;
 }

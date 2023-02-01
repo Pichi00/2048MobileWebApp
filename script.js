@@ -1,6 +1,8 @@
 const gameBoard = document.getElementById("game-board");
 const scoreView = document.getElementById("score");
 const undoButton = document.getElementById("undoButton");
+const bestScoresView = document.getElementById("best-scores");
+const bestScoresList = document.getElementById("best-scores-list");
 const GRID_SIZE = 4;
 
 const Direction = {
@@ -297,4 +299,20 @@ function gameOver() {
 
   sendScore();
   setUpGame();
+}
+
+function showBestScores() {
+  getTopScoresFromServer();
+  bestScoresList.innerHTML = "";
+  for (let i = 0; i < topScores.length; i++) {
+    let newElement = document.createElement("li");
+    newElement.innerText =
+      topScores[i][0] + "|\t" + topScores[i][1] + "|\t" + topScores[i][2];
+    bestScoresList.append(newElement);
+  }
+  bestScoresView.style.visibility = "visible";
+}
+
+function hideBestScores() {
+  bestScoresView.style.visibility = "hidden";
 }

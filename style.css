@@ -31,6 +31,16 @@ h1 {
   background-color: rgb(178, 209, 0);
 }
 
+#best-scores {
+  min-width: 70vmin;
+  /*min-height: 50vmin;*/
+  position: absolute;
+  background-color: gray;
+  top: 20vmin;
+  left: 10vmin;
+  visibility: hidden;
+}
+
 .val2 {
   background-color: rgb(67, 255, 192);
 }

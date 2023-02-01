@@ -16,10 +16,18 @@
       <button onclick="setUpGame()">Reset</button>
       <!-- Just for tests-->
       <button onclick="sendScore()">Send score</button>
-      <button onclick="getScore()">Get score</button>
+      <button onclick="getTopScoresFromServer()">Get score</button>
       <!------------------->
+      <button onclick="showBestScores()">Show Best Scores</button>
     </div>
     <div id="game-board"></div>
+
+    <div id="best-scores">
+      <button onclick="hideBestScores()">Close</button>
+      <p>Nickname | Score | Date</p>
+      <ol id="best-scores-list"></ol>
+    </div>
+
     <script src="script.js"></script>
     <script src="connector.js"></script>
   </body>

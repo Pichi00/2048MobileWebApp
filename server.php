@@ -4,7 +4,7 @@
         $data = file_get_contents("php://input");
         $file = fopen("data.json", "w");
         $json = json_decode($_POST['score']);
-        
+
         if (flock($file, LOCK_EX)) {
             fwrite($file, $data);
             flock($file, LOCK_UN);

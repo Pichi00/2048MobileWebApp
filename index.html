@@ -14,9 +14,21 @@
       <p id="score"></p>
       <button id="undoButton" onclick="undo()">Back</button>
       <button onclick="setUpGame()">Reset</button>
+      <!-- Just for tests-->
+      <button onclick="sendScore()">Send score</button>
+      <button onclick="getTopScoresFromServer()">Get score</button>
+      <!------------------->
+      <button onclick="showBestScores()">Show Best Scores</button>
     </div>
     <div id="game-board"></div>
-    <script src="script/script.js"></script>
+    <div id="best-scores">
+      <button onclick="hideBestScores()">Close</button>
+      <p>Nickname | Score | Date</p>
+      <ol id="best-scores-list"></ol>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="connector.js"></script>
     <script src="script/swipes.js"></script>
   </body>
 </html>

@@ -10,6 +10,21 @@ const Direction = {
   Down: "Down",
 };
 
+let topScores = [
+  ["Unknown 1", 128, getCurrentDateAndTime()],
+  ["Unknown 2", 64, getCurrentDateAndTime()],
+  ["Unknown 3", 32, getCurrentDateAndTime()],
+  ["Unknown 4", 16, getCurrentDateAndTime()],
+  ["Unknown 5", 8, getCurrentDateAndTime()],
+  ["Unknown 6", 4, getCurrentDateAndTime()],
+  ["Unknown 7", 2, getCurrentDateAndTime()],
+  ["Unknown 8", 0, getCurrentDateAndTime()],
+  ["Unknown 9", 0, getCurrentDateAndTime()],
+  ["Unknown 10", 0, getCurrentDateAndTime()],
+];
+
+let nickname = "Player";
+
 let boardArray;
 let score = 0;
 let undoArray;
@@ -38,6 +53,9 @@ function setUpGame() {
 
   score = 0;
   updateScore();
+
+  getTopScoresFromServer();
+
   gameBoard.innerHTML = "";
   // Create cells of the grid in html
   for (let i = 0; i < GRID_SIZE; i++) {
@@ -215,7 +233,7 @@ function spawnNewTile() {
   }
   // TODO: Add check condition if player has avaliable moves
   else {
-    alert("GAME OVER!");
+    gameOver();
   }
 }
 
@@ -249,4 +267,34 @@ function undo() {
   updateBoard();
   updateScore();
   undoButton.disabled = true;
+}
+
+function sendScore() {
+  getTopScoresFromServer();
+  topScores.push(Array(nickname, score, getCurrentDateAndTime()));
+  topScores.sort((a, b) => b[1] - a[1]);
+  topScores.pop();
+  POSTData(topScores);
+}
+
+function getCurrentDateAndTime() {
+  return new Date().toLocaleString();
+}
+
+function getTopScoresFromServer() {
+  GETData((data) => {
+    for (let i = 0; i < data.length; i++) {
+      topScores[i] = [data[i]["nickname"], data[i]["score"], data[i]["date"]];
+    }
+  });
+}
+
+function gameOver() {
+  userInput = prompt("GAME OVER! Please enter your nickname", "Player");
+  if (userInput != null && userInput.length > 0 && userInput.length < 60) {
+    nickname = userInput;
+  }
+
+  sendScore();
+  setUpGame();
 }

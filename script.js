@@ -37,6 +37,8 @@ let undoscore = 0;
 const CHANCE_2 = 65;
 const CHANCE_4 = 30;
 
+let isGameOver = false;
+
 window.onload = function () {
   setUpGame();
 };
@@ -46,6 +48,7 @@ function setUpGame() {
   console.log("Setting up game");
 
   gameOverView.style.visibility = "hidden";
+  isGameOver = false;
 
   boardArray = [
     [32, 4, 8, 16],
@@ -143,9 +146,10 @@ function slideHorizontally(dir) {
   }
 
   undoButton.disabled = false;
-
-  undoArray = JSON.parse(JSON.stringify(boardArray));
-  undoscore = score;
+  if (!isGameOver) {
+    undoArray = JSON.parse(JSON.stringify(boardArray));
+    undoscore = score;
+  }
 
   for (let r = 0; r < GRID_SIZE; r++) {
     let row = boardArray[r].slice();
@@ -180,8 +184,10 @@ function slideVertically(dir) {
 
   undoButton.disabled = false;
 
-  undoArray = JSON.parse(JSON.stringify(boardArray));
-  undoscore = score;
+  if (!isGameOver) {
+    undoArray = JSON.parse(JSON.stringify(boardArray));
+    undoscore = score;
+  }
 
   for (let c = 0; c < GRID_SIZE; c++) {
     let column = Array(
@@ -242,6 +248,7 @@ function spawnNewTile() {
 
   if (!hasAvaliableMoves()) {
     gameOverView.style.visibility = "visible";
+    isGameOver = true;
   }
 }
 
@@ -271,7 +278,7 @@ function canSpawnNewTile() {
 
 function undo() {
   gameOverView.style.visibility = "hidden";
-
+  isGameOver = false;
   boardArray = JSON.parse(JSON.stringify(undoArray));
   score = undoscore;
   updateBoard();

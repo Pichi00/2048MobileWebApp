@@ -1,5 +1,35 @@
+html body{
+  margin: 0;
+  background-color: #ccc;
+}
+
 h1 {
   text-align: center;
+  margin: 0;
+}
+
+#options{
+  padding: 2vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#options > * {
+  margin: auto;
+}
+
+.score {
+  background-color: #aaa;
+  padding: 10px;
+  border-radius: 1vmin;
+}
+
+#options button{
+  background-color: #aaa;
+  padding: 10px;
+  border-radius: 1vmin;
+  border: 0;
 }
 
 #game-board {
@@ -32,13 +62,15 @@ h1 {
 }
 
 #best-scores {
-  min-width: 70vmin;
   /*min-height: 50vmin;*/
-  position: absolute;
+  min-width: 70vmin;
+ 
   background-color: gray;
   top: 20vmin;
   left: 10vmin;
+  position: absolute;
   visibility: hidden;
+  justify-content:right;
 }
 
 .val2 {

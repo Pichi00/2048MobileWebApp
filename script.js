@@ -51,10 +51,10 @@ function setUpGame() {
   isGameOver = false;
 
   boardArray = [
-    [32, 4, 8, 16],
-    [2, 2, 128, 2],
-    [256, 128, 16, 4],
-    [1024, 2, 128, 2],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
   ];
 
   undoArray = JSON.parse(JSON.stringify(boardArray));
@@ -75,6 +75,9 @@ function setUpGame() {
       gameBoard.append(cell);
     }
   }
+
+  spawnNewTile();
+  spawnNewTile();
 
   console.log("Game set up");
 }

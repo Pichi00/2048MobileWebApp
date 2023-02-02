@@ -3,6 +3,7 @@ const scoreView = document.getElementById("score");
 const undoButton = document.getElementById("undoButton");
 const bestScoresView = document.getElementById("best-scores");
 const bestScoresList = document.getElementById("best-scores-list");
+const gameOverView = document.getElementById("game-over");
 const GRID_SIZE = 4;
 
 const Direction = {
@@ -13,13 +14,13 @@ const Direction = {
 };
 
 let topScores = [
-  ["Unknown 1", 128, getCurrentDateAndTime()],
-  ["Unknown 2", 64, getCurrentDateAndTime()],
-  ["Unknown 3", 32, getCurrentDateAndTime()],
-  ["Unknown 4", 16, getCurrentDateAndTime()],
-  ["Unknown 5", 8, getCurrentDateAndTime()],
-  ["Unknown 6", 4, getCurrentDateAndTime()],
-  ["Unknown 7", 2, getCurrentDateAndTime()],
+  ["Unknown 1", 0, getCurrentDateAndTime()],
+  ["Unknown 2", 0, getCurrentDateAndTime()],
+  ["Unknown 3", 0, getCurrentDateAndTime()],
+  ["Unknown 4", 0, getCurrentDateAndTime()],
+  ["Unknown 5", 0, getCurrentDateAndTime()],
+  ["Unknown 6", 0, getCurrentDateAndTime()],
+  ["Unknown 7", 0, getCurrentDateAndTime()],
   ["Unknown 8", 0, getCurrentDateAndTime()],
   ["Unknown 9", 0, getCurrentDateAndTime()],
   ["Unknown 10", 0, getCurrentDateAndTime()],
@@ -36,6 +37,8 @@ let undoscore = 0;
 const CHANCE_2 = 65;
 const CHANCE_4 = 30;
 
+let isGameOver = false;
+
 window.onload = function () {
   setUpGame();
 };
@@ -44,11 +47,14 @@ window.onload = function () {
 function setUpGame() {
   console.log("Setting up game");
 
+  gameOverView.style.visibility = "hidden";
+  isGameOver = false;
+
   boardArray = [
-    [0, 4, 8, 16],
-    [2, 2, 0, 2],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
+    [32, 4, 8, 16],
+    [2, 2, 128, 2],
+    [256, 128, 16, 4],
+    [1024, 2, 128, 2],
   ];
 
   undoArray = JSON.parse(JSON.stringify(boardArray));
@@ -140,8 +146,10 @@ function slideHorizontally(dir) {
   }
 
   undoButton.disabled = false;
-  undoArray = JSON.parse(JSON.stringify(boardArray));
-  undoscore = score;
+  if (!isGameOver) {
+    undoArray = JSON.parse(JSON.stringify(boardArray));
+    undoscore = score;
+  }
 
   for (let r = 0; r < GRID_SIZE; r++) {
     let row = boardArray[r].slice();
@@ -175,8 +183,11 @@ function slideVertically(dir) {
   }
 
   undoButton.disabled = false;
-  undoArray = JSON.parse(JSON.stringify(boardArray));
-  undoscore = score;
+
+  if (!isGameOver) {
+    undoArray = JSON.parse(JSON.stringify(boardArray));
+    undoscore = score;
+  }
 
   for (let c = 0; c < GRID_SIZE; c++) {
     let column = Array(
@@ -234,8 +245,10 @@ function spawnNewTile() {
     }
   }
   // TODO: Add check condition if player has avaliable moves
-  else {
-    gameOver();
+
+  if (!hasAvaliableMoves()) {
+    gameOverView.style.visibility = "visible";
+    isGameOver = true;
   }
 }
 
@@ -264,6 +277,8 @@ function canSpawnNewTile() {
 }
 
 function undo() {
+  gameOverView.style.visibility = "hidden";
+  isGameOver = false;
   boardArray = JSON.parse(JSON.stringify(undoArray));
   score = undoscore;
   updateBoard();
@@ -291,16 +306,6 @@ function getTopScoresFromServer() {
   });
 }
 
-function gameOver() {
-  userInput = prompt("GAME OVER! Please enter your nickname", "Player");
-  if (userInput != null && userInput.length > 0 && userInput.length < 60) {
-    nickname = userInput;
-  }
-
-  sendScore();
-  setUpGame();
-}
-
 function showBestScores() {
   getTopScoresFromServer();
   bestScoresList.innerHTML = "";
@@ -315,4 +320,44 @@ function showBestScores() {
 
 function hideBestScores() {
   bestScoresView.style.visibility = "hidden";
+}
+
+function gameOver() {
+  userInput = document.getElementById("username").textContent;
+  console.log(userInput);
+  if (userInput != null && userInput.length > 0 && userInput.length < 60) {
+    nickname = userInput;
+  }
+  gameOverView.style.visibility = "hidden";
+  sendScore();
+  setUpGame();
+}
+
+function hasAvaliableMoves() {
+  if (canSpawnNewTile()) {
+    return true;
+  }
+  for (let i = 0; i < GRID_SIZE; i++) {
+    let column = Array(
+      boardArray[0][i],
+      boardArray[1][i],
+      boardArray[2][i],
+      boardArray[3][i]
+    );
+    if (checkRow(column)) {
+      return true;
+    } else if (checkRow(boardArray[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function checkRow(row) {
+  for (let i = 0; i < row.length - 1; i++) {
+    if (row[i] == row[i + 1]) {
+      return true;
+    }
+  }
+  return false;
 }

@@ -1,4 +1,4 @@
-html body{
+html body {
   margin: 0;
   background-color: #ccc;
 }
@@ -8,7 +8,7 @@ h1 {
   margin: 0;
 }
 
-#options{
+#options {
   padding: 2vmin;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ h1 {
   border-radius: 1vmin;
 }
 
-#options button{
+#options button {
   background-color: #aaa;
   padding: 10px;
   border-radius: 1vmin;
@@ -61,16 +61,19 @@ h1 {
   background-color: rgb(178, 209, 0);
 }
 
-#best-scores {
-  /*min-height: 50vmin;*/
+.popUp {
   min-width: 70vmin;
- 
   background-color: gray;
   top: 20vmin;
   left: 10vmin;
   position: absolute;
   visibility: hidden;
-  justify-content:right;
+  justify-content: right;
+}
+
+#game-over {
+  text-align: center;
+  opacity: 80%;
 }
 
 .val2 {

@@ -306,7 +306,7 @@ function getTopScoresFromServer() {
   });
 }
 
-function showBestScores() {
+function toggleBestScores() {
   getTopScoresFromServer();
   bestScoresList.innerHTML = "";
   for (let i = 0; i < topScores.length; i++) {
@@ -315,16 +315,19 @@ function showBestScores() {
       topScores[i][0] + "|\t" + topScores[i][1] + "|\t" + topScores[i][2];
     bestScoresList.append(newElement);
   }
-  bestScoresView.style.visibility = "visible";
+  if (bestScoresView.style.visibility == "hidden") {
+    bestScoresView.style.visibility = "visible";
+  } else {
+    bestScoresView.style.visibility = "hidden";
+  }
 }
 
-function hideBestScores() {
+/*function hideBestScores() {
   bestScoresView.style.visibility = "hidden";
 }
-
+*/
 function gameOver() {
-  userInput = document.getElementById("username").textContent;
-  console.log(userInput);
+  userInput = document.getElementById("username").value;
   if (userInput != null && userInput.length > 0 && userInput.length < 60) {
     nickname = userInput;
   }

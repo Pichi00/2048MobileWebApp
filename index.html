@@ -32,8 +32,7 @@
 
     <div id="game-board"></div>
 
-    <div id="best-scores" class="popUp">
-      <button onclick="toggleBestScores()">Close</button>
+    <div id="best-scores" class="popUp" style="visibility: hidden">
       <p>Nickname | Score | Date</p>
       <ol id="best-scores-list"></ol>
     </div>
@@ -43,6 +42,15 @@
       <h3>Enter your username:</h3>
       <input type="text" id="username" placeholder="Player" />
       <button onclick="gameOver()">Submit</button>
+    </div>
+
+    <div id="win-screen" class="popUp">
+      <h2>You won!</h2>
+      <p>
+        You got 2048! However you can continue playing and try to get even
+        higher score!
+      </p>
+      <button onclick="hideWinScreen()">Continue</button>
     </div>
 
     <script src="script.js"></script>

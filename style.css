@@ -1,6 +1,6 @@
 html body {
   margin: 0;
-  background-color: #ccc;
+  background-color: rgb(250,248,239);
   overscroll-behavior: contain;
 }
 
@@ -8,6 +8,7 @@ h1 {
   text-align: center;
   margin: 0;
 }
+
 
 #options {
   padding: 2vmin;
@@ -23,31 +24,43 @@ h1 {
 .score {
   background-color: #aaa;
   padding: 10px;
-  border-radius: 1vmin;
+  border-radius: 10vmin;
 }
+
+
 
 #options button {
   background-color: #aaa;
   padding: 10px;
   border-radius: 1vmin;
-  border: 0;
+  border: 2px dashed rgb(22, 53, 230);  ;
 }
 
 .popUp button {
-  background-color: rgb(155, 176, 235);
+  background-color: rgb(15, 71, 226);
   padding: 10px;
   border-radius: 1vmin;
   border: 0;
 }
 
+#best-scores{
+  background-color: rgba(243, 178, 122, 0.89);
+  color: rgb(15, 13, 13);
+  border: 5px solid rgb(230, 10, 10);  ;
+
+}
+
+
+
 #game-board {
   display: grid;
   grid-template-columns: repeat(4, 20vmin);
   grid-template-rows: repeat(4, 20vmin);
-  background-color: #ccc;
+  background-color: rgb(250,248,239);
   gap: 2vmin;
   border-radius: 1vmin;
-  padding: 2vmin;
+
+  padding: 10vmin;
   position: relative;
   margin: 0 auto;
   justify-content: center;
@@ -66,6 +79,8 @@ h1 {
   width: 20vmin;
   height: 20vmin;
   border-radius: 1vmin;
+  color: rgb(82, 66, 66);
+  font-family: "Lucida Console", "Courier New", monospace;
   background-color: rgb(178, 209, 0);
 }
 
@@ -88,45 +103,46 @@ h1 {
 }
 
 .val2 {
-  background-color: rgb(67, 255, 192);
+  background-color: rgb(238, 228, 218);
 }
 
 .val4 {
-  background-color: rgb(18, 247, 170);
+  background-color: rgb(238,225,201);
 }
 
 .val8 {
-  background-color: rgb(0, 207, 138);
+  background-color: rgb(243, 178, 122);
 }
 
 .val16 {
-  background-color: rgb(59, 255, 118);
+  background-color: rgb(246,150,100);
 }
 
 .val32 {
-  background-color: rgb(32, 248, 97);
+  background-color: rgb(247,124,95);
 }
 
 .val64 {
-  background-color: rgb(0, 255, 76);
+  background-color: rgb(247,95,59);
 }
 
 .val128 {
-  background-color: rgb(26, 204, 2);
+  background-color: rgb(237,208,115);
 }
 
 .val256 {
-  background-color: rgb(18, 153, 0);
+  background-color: rgb(233, 185, 29);
 }
 
 .val512 {
-  background-color: rgb(224, 255, 50);
+  background-color: rgb(224, 222, 81);
 }
 
 .val1024 {
-  background-color: rgb(210, 243, 24);
+  background-color: rgb(238, 234, 2);
 }
 
 .val2048 {
-  background-color: rgb(178, 209, 0);
+  background-color: rgb(5, 5, 5);
+  color: white;
 }

@@ -1,60 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2048</title>
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <h1>2048</h1>
-    <div id="options">
-      <!-- <h3>Score</h3>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2048</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <h1>2048</h1>
+  <div id="options">
+    <!-- <h3>Score</h3>
       <p id="score"></p> -->
-      <div class="score">SCORE: <text id="score"></text></div>
-      <button id="undoButton" onclick="undo()">
-        <i class="fas fa-undo-alt"></i>
-      </button>
-      <button onclick="setUpGame()"><i class="fa fa-refresh"></i></button>
-      <button onclick="toggleBestScores()">
-        <i class="fas fa-stream"></i>
-      </button>
-    </div>
+    <div class="score">SCORE: <text id="score"></text></div>
+    <button id="undoButton" onclick="undo()">
+      <i class="fas fa-undo-alt">Back</i>
+    </button>
+    <button onclick="setUpGame()"><i class="fa fa-refresh"></i></button>
+    <button onclick="toggleBestScores()">Best Scores
+      <i class="fas fa-stream"></i>
+    </button>
+  </div>
 
-    <div id="game-board"></div>
+  <div id="game-board"></div>
 
-    <div id="best-scores" class="popUp" style="visibility: hidden">
-      <p>Nickname | Score | Date</p>
-      <ol id="best-scores-list"></ol>
-    </div>
+  <div id="best-scores" class="popUp" style="visibility: hidden">
+    <p>Nickname | Score | Date</p>
+    <ol id="best-scores-list"></ol>
+  </div>
 
-    <div id="game-over" class="popUp">
-      <h2>Game over!</h2>
-      <h3>Enter your username:</h3>
-      <input type="text" id="username" placeholder="Player" />
-      <button onclick="gameOver()">Submit</button>
-    </div>
+  <div id="game-over" class="popUp">
+    <h2>Game over!</h2>
+    <h3>Enter your username:</h3>
+    <input type="text" id="username" placeholder="Player" />
+    <button onclick="gameOver()">Submit</button>
+  </div>
 
-    <div id="win-screen" class="popUp">
-      <h2>You won!</h2>
-      <p>
-        You got 2048! However you can continue playing and try to get even
-        higher score!
-      </p>
-      <button onclick="hideWinScreen()">Continue</button>
-    </div>
+  <div id="win-screen" class="popUp">
+    <h2>You won!</h2>
+    <p>
+      You got 2048! However you can continue playing and try to get even
+      higher score!
+    </p>
+    <button onclick="hideWinScreen()">Continue</button>
+  </div>
 
-    <script src="script.js"></script>
-    <script src="connector.js"></script>
-    <script src="script/swipes.js"></script>
-  </body>
+  <script src="script.js"></script>
+  <script src="connector.js"></script>
+  <script src="script/swipes.js"></script>
+</body>
+
 </html>

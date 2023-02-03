@@ -33,6 +33,13 @@ h1 {
   border: 0;
 }
 
+.popUp button {
+  background-color: rgb(155, 176, 235);
+  padding: 10px;
+  border-radius: 1vmin;
+  border: 0;
+}
+
 #game-board {
   display: grid;
   grid-template-columns: repeat(4, 20vmin);
@@ -63,18 +70,21 @@ h1 {
 }
 
 .popUp {
-  min-width: 70vmin;
-  background-color: gray;
+  width: 74vmin;
+  background-color: rgb(140, 158, 209, 0.85);
   top: 20vmin;
   left: 10vmin;
   position: absolute;
   visibility: hidden;
   justify-content: right;
+  border-radius: 5vmin;
+  font-size: 4vmin;
+  padding: 3vmin;
 }
 
-#game-over {
+#game-over,
+#win-screen {
   text-align: center;
-  opacity: 80%;
 }
 
 .val2 {

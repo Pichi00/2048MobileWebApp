@@ -38,6 +38,7 @@ const CHANCE_2 = 65;
 const CHANCE_4 = 30;
 
 let isGameOver = false;
+let hasAlreadyWon = false;
 
 window.onload = function () {
   setUpGame();
@@ -49,6 +50,7 @@ function setUpGame() {
 
   gameOverView.style.visibility = "hidden";
   isGameOver = false;
+  hasAlreadyWon = false;
 
   boardArray = [
     [0, 0, 0, 0],
@@ -56,6 +58,14 @@ function setUpGame() {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ];
+
+  /* For testing
+  boardArray = [
+    [8, 16, 8, 16],
+    [16, 8, 16, 8],
+    [2, 4, 2, 4],
+    [4, 4, 1024, 1024],
+  ];*/
 
   undoArray = JSON.parse(JSON.stringify(boardArray));
 
@@ -131,6 +141,10 @@ function slide(row) {
       row[i] *= 2;
       row[i + 1] = 0;
       score += row[i];
+      if (row[i] == 2048 && !hasAlreadyWon) {
+        hasAlreadyWon = true;
+        document.getElementById("win-screen").style.visibility = "visible";
+      }
     }
   }
   row = excludeZeros(row);
@@ -298,7 +312,7 @@ function sendScore() {
 }
 
 function getCurrentDateAndTime() {
-  return new Date().toLocaleString();
+  return new Date().toLocaleDateString();
 }
 
 function getTopScoresFromServer() {
@@ -325,10 +339,10 @@ function toggleBestScores() {
   }
 }
 
-/*function hideBestScores() {
-  bestScoresView.style.visibility = "hidden";
+function hideWinScreen() {
+  document.getElementById("win-screen").style.visibility = "hidden";
 }
-*/
+
 function gameOver() {
   userInput = document.getElementById("username").value;
   if (userInput != null && userInput.length > 0 && userInput.length < 60) {
